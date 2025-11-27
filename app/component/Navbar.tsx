@@ -9,6 +9,7 @@ export default function Navbar() {
     const navLinks = [
         { href: '/', label: 'Accueil' },
         { href: '/product', label: 'Product' },
+        { href: '/anonce', label: 'Anonce' },
         { href: '/scraping-categorie', label: 'Scraping categorie' },
         { href: '/search', label: 'Search' },
         { href: '/export-data', label: 'Export Data' },
@@ -21,7 +22,7 @@ export default function Navbar() {
                 <div className='flex items-center justify-between h-16'>
                     <div className='flex items-center space-x-8'>
                         {navLinks.map(link => {
-                            const isActive = pathname === link.href;
+                            const isActive = pathname === link.href || pathname?.startsWith(link.href + '/');
                             return (
                                 <Link
                                     key={link.href}

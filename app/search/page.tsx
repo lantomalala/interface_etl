@@ -6,6 +6,7 @@ import ProductWidget from '../component/ProductWidget';
 interface Product {
     title: string;
     id: bigint;
+    itemId: string;
     priceNet: number;
     images: string[];
     currency: string;
@@ -37,6 +38,7 @@ export default function SearchPage() {
                 throw new Error('Erreur lors de la recherche');
             }
             const data = await response.json();
+            console.log()
             setProducts(data);
         } catch (error) {
             console.error('Erreur lors de la recherche:', error);
@@ -77,7 +79,7 @@ export default function SearchPage() {
             {!loading && products.length > 0 && (
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
                     {products.map(product => (
-                        <ProductWidget key={product.id.toString()} product={product} />
+                        <ProductWidget key={product.id} product={product} />
                     ))}
                 </div>
             )}

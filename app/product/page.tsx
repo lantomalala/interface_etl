@@ -4,6 +4,7 @@ import ProductWidget from '../component/ProductWidget';
 interface Product {
     title: string;
     id: bigint;
+    itemId: string;
     priceNet: number;
     images: string[];
     currency: string;

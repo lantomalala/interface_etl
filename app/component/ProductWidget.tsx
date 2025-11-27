@@ -3,6 +3,7 @@
 interface Product {
     title: string;
     id: bigint;
+    itemId: string;
     priceNet: number;
     images: string[];
     currency: string;
@@ -22,7 +23,7 @@ interface ProductWidgetProps {
 
 export default function ProductWidget({product}: ProductWidgetProps) {
     return (
-        <div className='bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-200 dark:border-gray-700'>
+        <div id={product.itemId} className='bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-200 dark:border-gray-700'>
             <div className='p-4'>
                 {product.images && (
                     <div className='w-full h-48 bg-gray-200 dark:bg-gray-700 rounded-md mb-4 flex items-center justify-center overflow-hidden'>

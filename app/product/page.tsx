@@ -2,20 +2,20 @@ import {PrismaClient, Product as PrismaProduct} from '@prisma/client';
 import ProductWidget from '../component/ProductWidget';
 
 interface Product {
-    title: string | null;
+    title: string;
     id: string;
     itemId: string;
-    priceNet: number | null;
+    priceNet: number;
     images: string[];
-    currency: string | null;
+    currency: string;
     seller: {
         name: string;
         url: string;
-    } | null;
-    listingStartDate: Date | null;
+    };
+    listingStartDate: Date;
     status: string;
-    endDate: Date | null;
-    closedReason: string | null;
+    endDate: Date;
+    closedReason: string;
 }
 
 const globalForPrisma = globalThis as any;

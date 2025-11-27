@@ -2,7 +2,7 @@
 
 interface Product {
     title: string;
-    id: bigint;
+    id: string;
     itemId: string;
     priceNet: number;
     images: string[];

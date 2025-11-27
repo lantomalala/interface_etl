@@ -5,7 +5,7 @@ import ProductWidget from '../component/ProductWidget';
 
 interface Product {
     title: string;
-    id: bigint;
+    id: string; // id en string après sérialisation
     itemId: string;
     priceNet: number;
     images: string[];
@@ -34,11 +34,8 @@ export default function SearchPage() {
         setHasSearched(true);
         try {
             const response = await fetch(`/api/products/search?q=${encodeURIComponent(searchTerm)}`);
-            if (!response.ok) {
-                throw new Error('Erreur lors de la recherche');
-            }
+            if (!response.ok) throw new Error('Erreur lors de la recherche');
             const data = await response.json();
-            console.log()
             setProducts(data);
         } catch (error) {
             console.error('Erreur lors de la recherche:', error);
@@ -92,4 +89,3 @@ export default function SearchPage() {
         </div>
     );
 }
-

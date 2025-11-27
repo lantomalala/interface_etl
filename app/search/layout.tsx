@@ -1,8 +1,7 @@
-export default function SearchLayout({
-    children,
+export default function ProductLayout({
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return <>{children}</>;
+  return <>{children}</>;
 }
-

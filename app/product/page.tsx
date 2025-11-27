@@ -1,21 +1,21 @@
-import {PrismaClient} from '@prisma/client';
+import {PrismaClient, Product as PrismaProduct} from '@prisma/client';
 import ProductWidget from '../component/ProductWidget';
 
 interface Product {
-    title: string;
+    title: string | null;
     id: string;
     itemId: string;
-    priceNet: number;
+    priceNet: number | null;
     images: string[];
-    currency: string;
+    currency: string | null;
     seller: {
         name: string;
         url: string;
-    };
-    listingStartDate: Date;
+    } | null;
+    listingStartDate: Date | null;
     status: string;
-    endDate: Date;
-    closedReason: string;
+    endDate: Date | null;
+    closedReason: string | null;
 }
 
 const globalForPrisma = globalThis as any;
@@ -23,8 +23,20 @@ export const prisma = globalForPrisma.prisma || new PrismaClient();
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
-const getProducts = async () => {
-    return await prisma.product.findMany();
+const getProducts = async (): Promise<Product[]> => {
+    const products = await prisma.product.findMany();
+    // Sérialisation des BigInt en string
+    return products.map((product: PrismaProduct) => ({
+        ...product,
+        id: product.id.toString(),
+        title: product.title || '',
+        priceNet: product.priceNet || 0,
+        currency: product.currency || 'EUR',
+        seller: (product.seller as { name?: string; url?: string } | null) || { name: '', url: '' },
+        listingStartDate: product.listingStartDate || new Date(),
+        endDate: product.endDate || new Date(),
+        closedReason: product.closedReason || '',
+    }));
 };
 
 export default async function ProductPage() {

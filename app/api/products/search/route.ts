@@ -34,11 +34,21 @@ export async function GET(request: NextRequest) {
 
         const products = await prisma.product.findMany({
             where: {
-                title: {
-                    not: null,
-                    contains: query,
-                    mode: 'insensitive',
-                },
+                OR: [
+                    {
+                        title: {
+                            not: null,
+                            contains: query,
+                            mode: 'insensitive',
+                        },
+                    },
+                    {
+                        itemId: {
+                            contains: query,
+                            mode: 'insensitive',
+                        },
+                    },
+                ],
             },
             take: 50,
             orderBy: { createdAt: 'desc' },

@@ -11,6 +11,7 @@ export default function Navbar() {
         { href: '/product', label: 'Product' },
         { href: '/scraping-categorie', label: 'Scraping categorie' },
         { href: '/search', label: 'Search' },
+        { href: '/export-data', label: 'Export Data' },
         { href: '/about', label: 'About' },
     ];
 
